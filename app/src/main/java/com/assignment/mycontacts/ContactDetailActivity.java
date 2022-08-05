@@ -1,6 +1,8 @@
 package com.assignment.mycontacts;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -12,6 +14,7 @@ public class ContactDetailActivity extends AppCompatActivity {
     TextView lastNameTextView;
     TextView emailIdTextView;
     TextView phoneNumberTextView;
+    Button backButton;
 
     public int contactId;
 
@@ -23,7 +26,13 @@ public class ContactDetailActivity extends AppCompatActivity {
         lastNameTextView = findViewById(R.id.lastName);
         emailIdTextView = findViewById(R.id.emailId);
         phoneNumberTextView = findViewById(R.id.phoneNumber);
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(this::goBack);
         bindIncomingData();
+    }
+
+    private void goBack(View view) {
+        super.onBackPressed();
     }
 
     private void bindIncomingData() {
@@ -43,6 +52,8 @@ public class ContactDetailActivity extends AppCompatActivity {
             contactId = getIntent().getIntExtra("contactId", 0);
         }
     }
+
+
 
 
 }
