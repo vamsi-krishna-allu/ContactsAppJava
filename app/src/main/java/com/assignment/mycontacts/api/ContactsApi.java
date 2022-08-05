@@ -8,16 +8,16 @@ public class ContactsApi {
     ArrayList<Contact> contacts = new ArrayList<>();
 
     public ArrayList<Contact> getContacts() {
-        contacts.add(new Contact(1,"fname1","lname1","phone","emailId"));
-        contacts.add(new Contact(2,"fname2","lname2","phone","emailId"));
-        contacts.add(new Contact(3,"fname3","lname3","phone","emailId"));
-        contacts.add(new Contact(4,"fname4","lname4","phone","emailId"));
-        contacts.add(new Contact(5,"fname5","lname5","phone","emailId"));
-        contacts.add(new Contact(6,"fname6","lname6","phone","emailId"));
-        contacts.add(new Contact(7,"fname7","lname7","phone","emailId"));
-        contacts.add(new Contact(8,"fname8","lname8","phone","emailId"));
-        contacts.add(new Contact(9,"fname9","lname9","phone","emailId"));
-        contacts.add(new Contact(10,"fname10","lname10","phone","emailId"));
+        contacts.add(new Contact(1,"mike","litekey","34253452675","mike.litekey@gmail.com"));
+        contacts.add(new Contact(2,"alex","topley","54637548932","alex.topley@gmail.com"));
+        contacts.add(new Contact(3,"chris","harris","43526454676","chris.harris@outlook.com"));
+        contacts.add(new Contact(4,"david","miller","23456745609","david.miller@gmail.com"));
+        contacts.add(new Contact(5,"craig","millan","34567897654","craig.millan@gmail.com"));
+        contacts.add(new Contact(6,"simon","taufel","34567823233","simon.taufel@gmail.com"));
+        contacts.add(new Contact(7,"simon","jones","12341234547","simon.jones@gmail.com"));
+        contacts.add(new Contact(8,"daren","gough","65784896949","daren.gough@gmail.com"));
+        contacts.add(new Contact(9,"ben","stone","65634829280","ben.stone@outlook.com"));
+        contacts.add(new Contact(10,"cal","stone","34566542340","cal.stone@gmail.com"));
         return contacts;
     }
 

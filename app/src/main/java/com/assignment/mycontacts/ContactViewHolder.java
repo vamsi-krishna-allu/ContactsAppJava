@@ -1,7 +1,6 @@
 package com.assignment.mycontacts;
 
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 

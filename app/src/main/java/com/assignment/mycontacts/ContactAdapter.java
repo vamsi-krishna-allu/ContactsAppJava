@@ -37,7 +37,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
         Contact currentContact = this.contactsList.get(position);
         String text = String.format("%s %s", currentContact.getFirstName(), currentContact.getLastName());
         viewHolder.getContactName().setText(text);
-        viewHolder.getContactTitle().setText(currentContact.getFirstName().substring(0,1));
+        viewHolder.getContactTitle().setText(currentContact.getFirstName().substring(0,1).toUpperCase());
 
         viewHolder.relativelayout.setOnClickListener(view -> {
             Intent intent = new Intent(context, ContactDetailActivity.class);
