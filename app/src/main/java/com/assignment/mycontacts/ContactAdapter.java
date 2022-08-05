@@ -1,6 +1,7 @@
 package com.assignment.mycontacts;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
     @NonNull
     @Override
     public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.contact_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contact_item, parent, false);
         ContactViewHolder viewHolder = new ContactViewHolder(view);
         return viewHolder;
     }
@@ -37,6 +38,17 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
         String text = String.format("%s %s", currentContact.getFirstName(), currentContact.getLastName());
         viewHolder.getContactName().setText(text);
         viewHolder.getContactTitle().setText(currentContact.getFirstName().substring(0,1));
+
+        viewHolder.relativelayout.setOnClickListener(view -> {
+            Intent intent = new Intent(context, ContactDetailActivity.class);
+            intent.putExtra("contactId", currentContact.getId());
+            intent.putExtra("firstName", currentContact.getFirstName());
+            intent.putExtra("lastName", currentContact.getLastName());
+            intent.putExtra("emailId", currentContact.getEmailId());
+            intent.putExtra("phoneNumber", currentContact.getPhoneNumber());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        });
     }
 
     @Override
