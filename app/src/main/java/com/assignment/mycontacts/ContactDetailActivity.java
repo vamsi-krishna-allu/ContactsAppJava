@@ -1,7 +1,9 @@
 package com.assignment.mycontacts;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,6 +17,7 @@ public class ContactDetailActivity extends AppCompatActivity {
     TextView emailIdTextView;
     TextView phoneNumberTextView;
     Button backButton;
+    Button editButton;
 
     public int contactId;
 
@@ -22,6 +25,7 @@ public class ContactDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_contact_detail);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         firstNameTextView = findViewById(R.id.firstName);
         lastNameTextView = findViewById(R.id.lastName);
         emailIdTextView = findViewById(R.id.emailId);
@@ -29,6 +33,20 @@ public class ContactDetailActivity extends AppCompatActivity {
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(this::goBack);
         bindIncomingData();
+
+        editButton = findViewById(R.id.editButton);
+        editButton.setOnClickListener(this::editButtonListener);
+    }
+
+    private void editButtonListener(View view) {
+        Intent intent = new Intent(ContactDetailActivity.this, EditContact.class);
+        intent.putExtra("contactId", contactId);
+        intent.putExtra("firstName", firstNameTextView.getText());
+        intent.putExtra("lastName", lastNameTextView.getText());
+        intent.putExtra("emailId", emailIdTextView.getText());
+        intent.putExtra("phoneNumber", phoneNumberTextView.getText());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void goBack(View view) {
