@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.assignment.mycontacts.modal.Contact;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
 
-    private ArrayList<Contact> contactsList;
+    private List<Contact> contactsList;
     private Context context;
 
-    public ContactAdapter(ArrayList<Contact> contactsList, Context context) {
+    public ContactAdapter(List<Contact> contactsList, Context context) {
         this.contactsList = contactsList;
         this.context = context;
     }

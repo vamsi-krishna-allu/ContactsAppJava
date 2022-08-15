@@ -6,36 +6,68 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.assignment.mycontacts.api.ContactsApi;
 import com.assignment.mycontacts.modal.Contact;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Contact> contacts = new ArrayList();
+    private List<Contact> contacts = new ArrayList();
     private RecyclerView contactsRecyclerView;
     Button addButton;
-
+    EditText searchBox;
+    ContactAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         contactsRecyclerView = findViewById(R.id.contactsListView);
         ContactsApi contactsApi = new ContactsApi();
-        contacts = contactsApi.getContacts();
+        contacts = contactsApi.initContacts();
 
-        ContactAdapter adapter = new ContactAdapter(contacts, getApplicationContext());
+        adapter = new ContactAdapter(contacts, getApplicationContext());
         contactsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         contactsRecyclerView.setAdapter(adapter);
 
-        adapter.notifyDataSetChanged();
+        searchBox = findViewById(R.id.editTextSearchContact);
 
+        searchBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!searchBox.getText().toString().isEmpty()) {
+                    contacts = contactsApi.getContacts().stream().filter(contact -> contact.getFirstName().contains(searchBox.getText().toString()) ||
+                            contact.getLastName().contains(searchBox.getText().toString())).collect(Collectors.toList());
+                }else {
+                    contacts = contactsApi.getContacts();
+                }
+                adapter = new ContactAdapter(contacts, getApplicationContext());
+                contactsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                contactsRecyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(this::addNewContact);
     }
