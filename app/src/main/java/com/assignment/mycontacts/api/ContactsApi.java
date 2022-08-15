@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class ContactsApi {
     ArrayList<Contact> contacts = new ArrayList<>();
 
-    public ArrayList<Contact> getContacts() {
+    public ArrayList<Contact> initContacts(){
         contacts.add(new Contact(1,"mike","litekey","34253452675","mike.litekey@gmail.com"));
         contacts.add(new Contact(2,"alex","topley","54637548932","alex.topley@gmail.com"));
         contacts.add(new Contact(3,"chris","harris","43526454676","chris.harris@outlook.com"));
@@ -18,6 +18,9 @@ public class ContactsApi {
         contacts.add(new Contact(8,"daren","gough","65784896949","daren.gough@gmail.com"));
         contacts.add(new Contact(9,"ben","stone","65634829280","ben.stone@outlook.com"));
         contacts.add(new Contact(10,"cal","stone","34566542340","cal.stone@gmail.com"));
+        return contacts;
+    }
+    public ArrayList<Contact> getContacts() {
         return contacts;
     }
 
