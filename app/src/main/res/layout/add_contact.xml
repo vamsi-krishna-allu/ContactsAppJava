@@ -92,13 +92,12 @@
         android:layout_marginEnd="51dp"
 
         android:layout_marginBottom="179dp"
-        android:hint="Save"
+        android:text="save"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cancel_btn"
-        app:layout_constraintTop_toBottomOf="@+id/emailId"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/emailId" />
 
     <Button
         android:id="@+id/cancel_btn"
@@ -106,7 +105,7 @@
         android:layout_height="52dp"
         android:layout_marginStart="63dp"
         android:layout_marginEnd="47dp"
-        android:hint="Cancel"
+        android:text="cancel"
         android:textSize="20dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/save_btn"
         app:layout_constraintEnd_toStartOf="@+id/save_btn"

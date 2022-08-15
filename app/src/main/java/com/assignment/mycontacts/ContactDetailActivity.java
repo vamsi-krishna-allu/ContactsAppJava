@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.assignment.mycontacts.modal.ContactEntity;
+import com.assignment.mycontacts.modal.ContactViewModal;
+
 public class ContactDetailActivity extends AppCompatActivity {
 
     TextView firstNameTextView;
@@ -18,6 +21,7 @@ public class ContactDetailActivity extends AppCompatActivity {
     TextView phoneNumberTextView;
     Button backButton;
     Button editButton;
+    Button deleteButton;
 
     public int contactId;
 
@@ -36,6 +40,18 @@ public class ContactDetailActivity extends AppCompatActivity {
 
         editButton = findViewById(R.id.editButton);
         editButton.setOnClickListener(this::editButtonListener);
+        deleteButton = findViewById(R.id.delete_btn);
+        deleteButton.setOnClickListener(this::deleteContact);
+    }
+
+    private void deleteContact(View view) {
+        ContactViewModal viewModal = new ContactViewModal(getApplication());
+        ContactEntity contact = new ContactEntity(firstNameTextView.getText().toString(),
+                lastNameTextView.getText().toString(),
+                phoneNumberTextView.getText().toString(),
+                emailIdTextView.getText().toString());
+        contact.setId(contactId);
+        viewModal.delete(contact);
     }
 
     private void editButtonListener(View view) {
@@ -70,8 +86,4 @@ public class ContactDetailActivity extends AppCompatActivity {
             contactId = getIntent().getIntExtra("contactId", 0);
         }
     }
-
-
-
-
 }

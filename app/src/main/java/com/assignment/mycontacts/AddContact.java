@@ -9,28 +9,42 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.assignment.mycontacts.modal.ContactEntity;
+import com.assignment.mycontacts.modal.ContactViewModal;
+
 public class AddContact extends AppCompatActivity {
 
-    EditText first_name;
-    EditText last_name;
-    EditText phonenumber;
+    EditText firstName;
+    EditText lastName;
+    EditText phoneNumber;
     EditText emailId;
 
-    Button save_btn;
-    Button cancel_btn;
+    Button saveButton;
+    Button cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_contact);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        first_name = findViewById(R.id.firstName);
-        last_name = findViewById(R.id.lastName);
-        phonenumber = findViewById(R.id.phonenumber);
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
+        phoneNumber = findViewById(R.id.phonenumber);
         emailId = findViewById(R.id.emailId);
-        save_btn = findViewById(R.id.save_btn);
-        cancel_btn = findViewById(R.id.cancel_btn);
-        cancel_btn.setOnClickListener(this::goBack);
+        saveButton = findViewById(R.id.save_btn);
+        cancelButton = findViewById(R.id.cancel_btn);
+        cancelButton.setOnClickListener(this::goBack);
+        saveButton.setOnClickListener(this::addContact);
+    }
+
+    private void addContact(View view) {
+        ContactViewModal viewModal = new ContactViewModal(getApplication());
+        ContactEntity contact = new ContactEntity(firstName.getText().toString(),
+                lastName.getText().toString(),
+                phoneNumber.getText().toString(),
+                emailId.getText().toString());
+        viewModal.insert(contact);
+        super.onBackPressed();
     }
 
     private void goBack(View view) {

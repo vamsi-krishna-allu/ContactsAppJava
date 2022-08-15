@@ -1,10 +1,13 @@
 package com.assignment.mycontacts;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +19,9 @@ import android.widget.EditText;
 
 import com.assignment.mycontacts.api.ContactsApi;
 import com.assignment.mycontacts.modal.Contact;
+import com.assignment.mycontacts.modal.ContactDatabaseClient;
+import com.assignment.mycontacts.modal.ContactEntity;
+import com.assignment.mycontacts.modal.ContactViewModal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,24 +29,34 @@ import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Contact> contacts = new ArrayList();
+    private List<ContactEntity> contacts = new ArrayList();
     private RecyclerView contactsRecyclerView;
     Button addButton;
     EditText searchBox;
     ContactAdapter adapter;
+    ContactViewModal contactViewModal;
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        contactsRecyclerView = findViewById(R.id.contactsListView);
-        ContactsApi contactsApi = new ContactsApi();
-        contacts = contactsApi.initContacts();
+        context = getApplicationContext();
 
-        adapter = new ContactAdapter(contacts, getApplicationContext());
-        contactsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        contactsRecyclerView = findViewById(R.id.contactsListView);
+
+        contactViewModal = new ContactViewModal(getApplication());
+        adapter = new ContactAdapter(contacts, context);
+        contactsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         contactsRecyclerView.setAdapter(adapter);
+
+        contactViewModal.getAllContacts().observe(this, models -> {
+            adapter = new ContactAdapter(models, context);
+            contactsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+            contactsRecyclerView.setAdapter(adapter);
+        });
 
         searchBox = findViewById(R.id.editTextSearchContact);
 
@@ -53,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(!searchBox.getText().toString().isEmpty()) {
-                    contacts = contactsApi.getContacts().stream().filter(contact -> contact.getFirstName().contains(searchBox.getText().toString()) ||
+                    contacts = contactViewModal.getAllContacts().getValue().stream().filter(contact -> contact.getFirstName().contains(searchBox.getText().toString()) ||
                             contact.getLastName().contains(searchBox.getText().toString())).collect(Collectors.toList());
                 }else {
-                    contacts = contactsApi.getContacts();
+                    contacts = contactViewModal.getAllContacts().getValue();
                 }
-                adapter = new ContactAdapter(contacts, getApplicationContext());
+                adapter = new ContactAdapter(contacts, context);
                 contactsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 contactsRecyclerView.setAdapter(adapter);
             }
