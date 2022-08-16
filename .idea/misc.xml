@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/contact_title_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rounded_search.xml" value="0.2305" />
         <entry key="app/src/main/res/layout/activity_edit_contact.xml" value="0.1490036231884058" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.12228260869565218" />
         <entry key="app/src/main/res/layout/add_contact.xml" value="0.1490036231884058" />
