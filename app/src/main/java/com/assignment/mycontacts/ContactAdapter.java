@@ -5,22 +5,21 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.assignment.mycontacts.modal.Contact;
+import com.assignment.mycontacts.modal.ContactEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
 
-    private List<Contact> contactsList;
+    private List<ContactEntity> contactsList;
     private Context context;
 
-    public ContactAdapter(List<Contact> contactsList, Context context) {
+    public ContactAdapter(List<ContactEntity> contactsList, Context context) {
         this.contactsList = contactsList;
         this.context = context;
     }
@@ -35,7 +34,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder viewHolder, int position) {
-        Contact currentContact = this.contactsList.get(position);
+        ContactEntity currentContact = this.contactsList.get(position);
         String text = String.format("%s %s", currentContact.getFirstName(), currentContact.getLastName());
         viewHolder.getContactName().setText(text);
         viewHolder.getContactTitle().setText(currentContact.getFirstName().substring(0,1).toUpperCase());
@@ -54,6 +53,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
 
     @Override
     public int getItemCount() {
-        return this.contactsList.size();
+        return this.contactsList != null ? this.contactsList.size() : 0;
     }
 }

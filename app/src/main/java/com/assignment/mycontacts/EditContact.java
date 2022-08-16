@@ -9,30 +9,44 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.assignment.mycontacts.modal.ContactEntity;
+import com.assignment.mycontacts.modal.ContactViewModal;
+
 public class EditContact extends AppCompatActivity {
 
-    EditText first_name;
-    EditText last_name;
-    EditText phonenumber;
+    EditText firstName;
+    EditText lastName;
+    EditText phoneNumber;
     EditText emailId;
     private int contactId;
-    Button save_btn;
-    Button cancel_btn;
+    Button saveButton;
+    Button cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_contact);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        first_name = findViewById(R.id.firstName);
-        last_name = findViewById(R.id.lastName);
-        phonenumber = findViewById(R.id.phonenumber);
+        firstName = findViewById(R.id.firstName);
+        lastName = findViewById(R.id.lastName);
+        phoneNumber = findViewById(R.id.phonenumber);
         emailId = findViewById(R.id.emailId);
-        save_btn = findViewById(R.id.save_btn);
-        cancel_btn = findViewById(R.id.cancel_btn);
+        saveButton = findViewById(R.id.save_btn);
+        cancelButton = findViewById(R.id.cancel_btn);
 
-        cancel_btn.setOnClickListener(this::goBack);
+        cancelButton.setOnClickListener(this::goBack);
+        saveButton.setOnClickListener(this::updateContact);
         bindIncomingData();
+    }
+
+    private void updateContact(View view) {
+        ContactViewModal viewModal = new ContactViewModal(getApplication());
+        ContactEntity contact = new ContactEntity(firstName.getText().toString(),
+                lastName.getText().toString(),
+                phoneNumber.getText().toString(),
+                emailId.getText().toString());
+        contact.setId(contactId);
+        viewModal.update(contact);
     }
 
     private void goBack(View view) {
@@ -41,16 +55,16 @@ public class EditContact extends AppCompatActivity {
 
     private void bindIncomingData() {
         if(getIntent().hasExtra("firstName")){
-            first_name.setText(getIntent().getStringExtra("firstName"));
+            firstName.setText(getIntent().getStringExtra("firstName"));
         }
         if(getIntent().hasExtra("lastName")){
-            last_name.setText(getIntent().getStringExtra("lastName"));
+            lastName.setText(getIntent().getStringExtra("lastName"));
         }
         if(getIntent().hasExtra("emailId")){
             emailId.setText(getIntent().getStringExtra("emailId"));
         }
         if(getIntent().hasExtra("phoneNumber")){
-            phonenumber.setText(getIntent().getStringExtra("phoneNumber"));
+            phoneNumber.setText(getIntent().getStringExtra("phoneNumber"));
         }
         if(getIntent().hasExtra("contactId")){
             contactId = getIntent().getIntExtra("contactId", 0);
