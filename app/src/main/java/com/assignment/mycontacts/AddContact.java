@@ -2,12 +2,12 @@ package com.assignment.mycontacts;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.assignment.mycontacts.modal.ContactEntity;
 import com.assignment.mycontacts.modal.ContactViewModal;
@@ -20,19 +20,19 @@ public class AddContact extends AppCompatActivity {
     EditText emailId;
 
     Button saveButton;
-    Button cancelButton;
+    ImageButton cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_contact);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        firstName = findViewById(R.id.firstName);
-        lastName = findViewById(R.id.lastName);
-        phoneNumber = findViewById(R.id.phonenumber);
-        emailId = findViewById(R.id.emailId);
-        saveButton = findViewById(R.id.save_btn);
-        cancelButton = findViewById(R.id.cancel_btn);
+        firstName = findViewById(R.id.addfirstName);
+        lastName = findViewById(R.id.addlastName);
+        phoneNumber = findViewById(R.id.addphonenumber);
+        emailId = findViewById(R.id.addemailId);
+        saveButton = findViewById(R.id.saveContact);
+        cancelButton = findViewById(R.id.newCancelButton);
         cancelButton.setOnClickListener(this::goBack);
         saveButton.setOnClickListener(this::addContact);
     }
