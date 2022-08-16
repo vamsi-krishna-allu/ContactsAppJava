@@ -17,9 +17,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.assignment.mycontacts.api.ContactsApi;
-import com.assignment.mycontacts.modal.Contact;
-import com.assignment.mycontacts.modal.ContactDatabaseClient;
 import com.assignment.mycontacts.modal.ContactEntity;
 import com.assignment.mycontacts.modal.ContactViewModal;
 
