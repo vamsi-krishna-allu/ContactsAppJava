@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +15,13 @@ import com.assignment.mycontacts.modal.ContactViewModal;
 
 public class ContactDetailActivity extends AppCompatActivity {
 
-    TextView firstNameTextView;
-    TextView lastNameTextView;
-    TextView emailIdTextView;
-    TextView phoneNumberTextView;
-    Button backButton;
-    Button editButton;
-    Button deleteButton;
+    EditText firstNameTextView;
+    EditText lastNameTextView;
+    EditText emailIdTextView;
+    EditText phoneNumberTextView;
+    ImageButton backButton;
+    ImageButton editButton;
+    ImageButton deleteButton;
 
     public int contactId;
 
@@ -30,17 +30,17 @@ public class ContactDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_contact_detail);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        firstNameTextView = findViewById(R.id.firstName);
-        lastNameTextView = findViewById(R.id.lastName);
-        emailIdTextView = findViewById(R.id.emailId);
-        phoneNumberTextView = findViewById(R.id.phoneNumber);
+        firstNameTextView = findViewById(R.id.viewfirstName);
+        lastNameTextView = findViewById(R.id.viewLastName);
+        emailIdTextView = findViewById(R.id.viewEmailAddress);
+        phoneNumberTextView = findViewById(R.id.viewPhoneNumber);
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(this::goBack);
         bindIncomingData();
 
         editButton = findViewById(R.id.editButton);
         editButton.setOnClickListener(this::editButtonListener);
-        deleteButton = findViewById(R.id.delete_btn);
+        deleteButton = findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(this::deleteContact);
     }
 
@@ -57,10 +57,10 @@ public class ContactDetailActivity extends AppCompatActivity {
     private void editButtonListener(View view) {
         Intent intent = new Intent(ContactDetailActivity.this, EditContact.class);
         intent.putExtra("contactId", contactId);
-        intent.putExtra("firstName", firstNameTextView.getText());
-        intent.putExtra("lastName", lastNameTextView.getText());
-        intent.putExtra("emailId", emailIdTextView.getText());
-        intent.putExtra("phoneNumber", phoneNumberTextView.getText());
+        intent.putExtra("firstName", firstNameTextView.getText().toString());
+        intent.putExtra("lastName", lastNameTextView.getText().toString());
+        intent.putExtra("emailId", emailIdTextView.getText().toString());
+        intent.putExtra("phoneNumber", phoneNumberTextView.getText().toString());
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
