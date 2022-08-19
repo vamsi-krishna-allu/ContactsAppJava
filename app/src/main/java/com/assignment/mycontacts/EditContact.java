@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.assignment.mycontacts.modal.ContactEntity;
 import com.assignment.mycontacts.modal.ContactViewModal;
@@ -47,6 +48,11 @@ public class EditContact extends AppCompatActivity {
      */
     private void updateContact(View view) {
         ContactViewModal viewModal = new ContactViewModal(getApplication());
+        String validationMessage = CustomValidator.validateContact(firstName, lastName,phoneNumber,emailId);
+        if(validationMessage != null){
+            Toast.makeText(this, validationMessage, Toast.LENGTH_SHORT).show();
+            return;
+        }
         ContactEntity contact = new ContactEntity(firstName.getText().toString(),
                 lastName.getText().toString(),
                 phoneNumber.getText().toString(),
