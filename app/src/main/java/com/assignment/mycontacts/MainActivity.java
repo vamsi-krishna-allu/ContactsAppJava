@@ -1,27 +1,22 @@
 package com.assignment.mycontacts;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SearchView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.assignment.mycontacts.modal.ContactEntity;
 import com.assignment.mycontacts.modal.ContactViewModal;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         contactsRecyclerView.setAdapter(adapter);
 
         contactViewModal.getAllContacts().observe(this, models -> {
+            models.sort(Comparator.comparing(ContactEntity::getFirstName));
             adapter = new ContactAdapter(models, context);
             contactsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
             contactsRecyclerView.setAdapter(adapter);
@@ -67,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     contacts = contactViewModal.getAllContacts().getValue();
                 }
+                contacts.sort(Comparator.comparing(ContactEntity::getFirstName));
                 adapter = new ContactAdapter(contacts, context);
                 contactsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 contactsRecyclerView.setAdapter(adapter);
@@ -81,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     contacts = contactViewModal.getAllContacts().getValue();
                 }
+                contacts.sort(Comparator.comparing(ContactEntity::getFirstName));
                 adapter = new ContactAdapter(contacts, context);
                 contactsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 contactsRecyclerView.setAdapter(adapter);
