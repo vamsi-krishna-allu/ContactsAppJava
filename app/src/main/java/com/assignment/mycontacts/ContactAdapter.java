@@ -32,15 +32,22 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
         return viewHolder;
     }
 
+    /**
+     * This is to bind the contact data to recycler view using contact view holder
+     * @param viewHolder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder viewHolder, int position) {
         ContactEntity currentContact = this.contactsList.get(position);
         String text = String.format("%s %s", currentContact.getFirstName(), currentContact.getLastName());
         viewHolder.getContactName().setText(text);
         if(!currentContact.getFirstName().isEmpty()){
+            // sets the title as in circle beside each contact
             viewHolder.getContactTitle().setText(currentContact.getFirstName().substring(0,1).toUpperCase());
         }
 
+        // listener for each item click in recycler view, it passes data of the selected contact item through intent
         viewHolder.relativelayout.setOnClickListener(view -> {
             Intent intent = new Intent(context, ContactDetailActivity.class);
             intent.putExtra("contactId", currentContact.getId());
@@ -53,6 +60,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
         });
     }
 
+    /**
+     * returns total count of contacts in recycler view
+     * @return
+     */
     @Override
     public int getItemCount() {
         return this.contactsList != null ? this.contactsList.size() : 0;

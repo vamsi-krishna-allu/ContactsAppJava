@@ -13,6 +13,11 @@ public class DeleteContact extends AsyncTask<ContactEntity, Void, Void> {
         this.contactDao = contactDao;
     }
 
+    /**
+     * performs delete action in database using dao in background
+     * @param contactEntities
+     * @return
+     */
     @Override
     protected Void doInBackground(ContactEntity... contactEntities) {
         contactDao.delete(contactEntities[0]);

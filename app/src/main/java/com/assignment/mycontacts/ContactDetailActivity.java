@@ -1,5 +1,6 @@
 package com.assignment.mycontacts;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -44,6 +45,10 @@ public class ContactDetailActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(this::deleteContact);
     }
 
+    /**
+     * below method is to delete contact
+     * @param view
+     */
     private void deleteContact(View view) {
         ContactViewModal viewModal = new ContactViewModal(getApplication());
         ContactEntity contact = new ContactEntity(firstNameTextView.getText().toString(),
@@ -52,8 +57,14 @@ public class ContactDetailActivity extends AppCompatActivity {
                 emailIdTextView.getText().toString());
         contact.setId(contactId);
         viewModal.delete(contact);
+        goBack(view);
     }
 
+    /**
+     * Listener to edit button
+     * When user clicks on edit button data gets added to intent and navigated to next screen
+     * @param view
+     */
     private void editButtonListener(View view) {
         Intent intent = new Intent(ContactDetailActivity.this, EditContact.class);
         intent.putExtra("contactId", contactId);
@@ -65,10 +76,17 @@ public class ContactDetailActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * this is used to go back to previous screen
+     * @param view
+     */
     private void goBack(View view) {
         super.onBackPressed();
     }
 
+    /**
+     * It binds the data that is passed while navigation
+     */
     private void bindIncomingData() {
         if(getIntent().hasExtra("firstName")){
             firstNameTextView.setText(getIntent().getStringExtra("firstName"));

@@ -46,7 +46,12 @@ public class MainActivity extends AppCompatActivity {
         contactsRecyclerView.setAdapter(adapter);
 
         contactViewModal.getAllContacts().observe(this, models -> {
-            models.sort(Comparator.comparing(ContactEntity::getFirstName));
+            // compare by first name
+            Comparator compareByFirstName = Comparator.comparing(ContactEntity::getFirstName);
+            // compare by last name
+            Comparator compareByLastName = Comparator.comparing(ContactEntity::getLastName);
+            // sort with the above comparators
+            models.sort(compareByFirstName.thenComparing(compareByLastName));
             adapter = new ContactAdapter(models, context);
             contactsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
             contactsRecyclerView.setAdapter(adapter);
@@ -55,30 +60,40 @@ public class MainActivity extends AppCompatActivity {
         searchBox = findViewById(R.id.searchContact);
 
         searchBox.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            // compare by first name
+            Comparator compareByFirstName = Comparator.comparing(ContactEntity::getFirstName);
+            // compare by last name
+            Comparator compareByLastName = Comparator.comparing(ContactEntity::getLastName);
+
+            // gets fired when user clicks search button
             @Override
             public boolean onQueryTextSubmit(String s) {
+                // when search is not empty contact list is filtered based on search entry and updates the adapter with new contacts
                 if(!s.isEmpty()) {
                     contacts = contactViewModal.getAllContacts().getValue().stream().filter(contact -> contact.getFirstName().contains(s) ||
                             contact.getLastName().contains(s)).collect(Collectors.toList());
                 }else {
                     contacts = contactViewModal.getAllContacts().getValue();
                 }
-                contacts.sort(Comparator.comparing(ContactEntity::getFirstName));
+                // sort with the above comparators
+                contacts.sort(compareByFirstName.thenComparing(compareByLastName));
                 adapter = new ContactAdapter(contacts, context);
                 contactsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 contactsRecyclerView.setAdapter(adapter);
                 return false;
             }
 
+            // gets fired when user types into search box
             @Override
             public boolean onQueryTextChange(String s) {
+                // when search is not empty contact list is filtered based on search entry and updates the adapter with new contacts
                 if(!s.isEmpty()) {
                     contacts = contactViewModal.getAllContacts().getValue().stream().filter(contact -> contact.getFirstName().contains(s) ||
                             contact.getLastName().contains(s)).collect(Collectors.toList());
                 }else {
                     contacts = contactViewModal.getAllContacts().getValue();
                 }
-                contacts.sort(Comparator.comparing(ContactEntity::getFirstName));
+                contacts.sort(compareByFirstName.thenComparing(compareByLastName));
                 adapter = new ContactAdapter(contacts, context);
                 contactsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 contactsRecyclerView.setAdapter(adapter);
@@ -89,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(this::addNewContact);
     }
 
+    /**
+     * When a new activity is to be added user is navigated to add contact screen
+     * @param view
+     */
     private void addNewContact(View view) {
         Intent intent = new Intent(MainActivity.this, AddContact.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

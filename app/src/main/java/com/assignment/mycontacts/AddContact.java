@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.assignment.mycontacts.modal.ContactEntity;
 import com.assignment.mycontacts.modal.ContactViewModal;
@@ -37,8 +38,17 @@ public class AddContact extends AppCompatActivity {
         saveButton.setOnClickListener(this::addContact);
     }
 
+    /**
+     * Adds the contact to the database
+     * @param view
+     */
     private void addContact(View view) {
         ContactViewModal viewModal = new ContactViewModal(getApplication());
+        String validationMessage = CustomValidator.validateContact(firstName, lastName,phoneNumber,emailId);
+        if(validationMessage != null){
+            Toast.makeText(this, validationMessage, Toast.LENGTH_SHORT).show();
+            return;
+        }
         ContactEntity contact = new ContactEntity(firstName.getText().toString(),
                 lastName.getText().toString(),
                 phoneNumber.getText().toString(),
@@ -47,6 +57,10 @@ public class AddContact extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /**
+     * Go back to previous activity on cancel
+     * @param view
+     */
     private void goBack(View view) {
         super.onBackPressed();
     }
