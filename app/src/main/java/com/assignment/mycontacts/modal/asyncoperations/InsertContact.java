@@ -12,6 +12,11 @@ public class InsertContact extends AsyncTask<ContactEntity, Void, Void> {
         this.contactDao = contactDao;
     }
 
+    /**
+     * performs insert action in database using dao in background
+     * @param contactEntities
+     * @return
+     */
     @Override
     protected Void doInBackground(ContactEntity... contactEntities) {
         contactDao.insert(contactEntities[0]);

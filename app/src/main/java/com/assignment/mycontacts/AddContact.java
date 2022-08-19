@@ -37,6 +37,10 @@ public class AddContact extends AppCompatActivity {
         saveButton.setOnClickListener(this::addContact);
     }
 
+    /**
+     * Adds the contact to the database
+     * @param view
+     */
     private void addContact(View view) {
         ContactViewModal viewModal = new ContactViewModal(getApplication());
         ContactEntity contact = new ContactEntity(firstName.getText().toString(),
@@ -47,6 +51,10 @@ public class AddContact extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /**
+     * Go back to previous activity on cancel
+     * @param view
+     */
     private void goBack(View view) {
         super.onBackPressed();
     }

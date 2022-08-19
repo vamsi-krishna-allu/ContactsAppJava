@@ -13,6 +13,11 @@ public class UpdateContact extends AsyncTask<ContactEntity, Void, Void> {
         this.contactDao = contactDao;
     }
 
+    /**
+     * performs update action in database using dao in background
+     * @param contactEntities
+     * @return
+     */
     @Override
     protected Void doInBackground(ContactEntity... contactEntities) {
         contactDao.update(contactEntities[0]);

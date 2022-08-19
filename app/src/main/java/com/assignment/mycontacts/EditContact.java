@@ -2,6 +2,8 @@ package com.assignment.mycontacts;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -39,6 +41,10 @@ public class EditContact extends AppCompatActivity {
         bindIncomingData();
     }
 
+    /**
+     * Update contact data when user clicks on Done
+     * @param view
+     */
     private void updateContact(View view) {
         ContactViewModal viewModal = new ContactViewModal(getApplication());
         ContactEntity contact = new ContactEntity(firstName.getText().toString(),
@@ -49,10 +55,17 @@ public class EditContact extends AppCompatActivity {
         viewModal.update(contact);
     }
 
+    /**
+     * Go back when user clicks on cancel
+     * @param view
+     */
     private void goBack(View view) {
         super.onBackPressed();
     }
 
+    /**
+     * Bind the incoming data from previous activity
+     */
     private void bindIncomingData() {
         if(getIntent().hasExtra("firstName")){
             firstName.setText(getIntent().getStringExtra("firstName"));
