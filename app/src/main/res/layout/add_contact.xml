@@ -11,105 +11,102 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="59dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="22dp"
-        android:text="Creat a new Contact"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="187dp"
+        android:gravity="center_vertical"
+        android:text="New Contact"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/firstName"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,RtlCompat" />
 
-    <EditText
-        android:id="@+id/firstName"
+    <ScrollView
+        android:id="@+id/scrollView4"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="27dp"
-        android:hint="First Name"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/lastName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/lastName"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="25dp"
-        android:hint="Last Name"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/phonenumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstName"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/phonenumber"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="23dp"
-        android:hint="Phone Number"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/emailId"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastName"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/emailId"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="56dp"
-        android:hint="Email Address"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/save_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phonenumber"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/save_btn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="51dp"
-
-        android:layout_marginBottom="179dp"
-        android:text="save"
-        android:textSize="20dp"
+        android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cancel_btn"
-        app:layout_constraintTop_toBottomOf="@+id/emailId" />
-
-    <Button
-        android:id="@+id/cancel_btn"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="63dp"
-        android:layout_marginEnd="47dp"
-        android:text="cancel"
-        android:textSize="20dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/save_btn"
-        app:layout_constraintEnd_toStartOf="@+id/save_btn"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/newCancelButton">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/addfirstName"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="First Name"
+                android:textAlignment="textStart"
+                tools:ignore="MissingConstraints" />
+
+            <EditText
+                android:id="@+id/addlastName"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Last Name"
+                android:textAlignment="textStart"
+                tools:ignore="MissingConstraints" />
+
+            <EditText
+                android:id="@+id/addphonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Phone Number"
+                android:textAlignment="textStart"
+                tools:ignore="MissingConstraints" />
+
+            <EditText
+                android:id="@+id/addemailId"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Email Address"
+                android:textAlignment="textStart"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/saveContact"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/light_blue"
+                android:text="save"
+                android:textSize="34sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/newCancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="189dp"
+        android:background="#FFFFFF"
+        android:contentDescription="cancel button"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/homeAsUpIndicator" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

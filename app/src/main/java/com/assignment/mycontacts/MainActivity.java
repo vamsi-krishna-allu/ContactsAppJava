@@ -1,26 +1,22 @@
 package com.assignment.mycontacts;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.SearchView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.assignment.mycontacts.modal.ContactEntity;
 import com.assignment.mycontacts.modal.ContactViewModal;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private List<ContactEntity> contacts = new ArrayList();
     private RecyclerView contactsRecyclerView;
     Button addButton;
-    EditText searchBox;
+    SearchView searchBox;
     ContactAdapter adapter;
     ContactViewModal contactViewModal;
     private Context context;
@@ -50,35 +46,43 @@ public class MainActivity extends AppCompatActivity {
         contactsRecyclerView.setAdapter(adapter);
 
         contactViewModal.getAllContacts().observe(this, models -> {
+            models.sort(Comparator.comparing(ContactEntity::getFirstName));
             adapter = new ContactAdapter(models, context);
             contactsRecyclerView.setLayoutManager(new LinearLayoutManager(context));
             contactsRecyclerView.setAdapter(adapter);
         });
 
-        searchBox = findViewById(R.id.editTextSearchContact);
+        searchBox = findViewById(R.id.searchContact);
 
-        searchBox.addTextChangedListener(new TextWatcher() {
+        searchBox.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(!searchBox.getText().toString().isEmpty()) {
-                    contacts = contactViewModal.getAllContacts().getValue().stream().filter(contact -> contact.getFirstName().contains(searchBox.getText().toString()) ||
-                            contact.getLastName().contains(searchBox.getText().toString())).collect(Collectors.toList());
+            public boolean onQueryTextSubmit(String s) {
+                if(!s.isEmpty()) {
+                    contacts = contactViewModal.getAllContacts().getValue().stream().filter(contact -> contact.getFirstName().contains(s) ||
+                            contact.getLastName().contains(s)).collect(Collectors.toList());
                 }else {
                     contacts = contactViewModal.getAllContacts().getValue();
                 }
+                contacts.sort(Comparator.comparing(ContactEntity::getFirstName));
                 adapter = new ContactAdapter(contacts, context);
                 contactsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 contactsRecyclerView.setAdapter(adapter);
+                return false;
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
+            public boolean onQueryTextChange(String s) {
+                if(!s.isEmpty()) {
+                    contacts = contactViewModal.getAllContacts().getValue().stream().filter(contact -> contact.getFirstName().contains(s) ||
+                            contact.getLastName().contains(s)).collect(Collectors.toList());
+                }else {
+                    contacts = contactViewModal.getAllContacts().getValue();
+                }
+                contacts.sort(Comparator.comparing(ContactEntity::getFirstName));
+                adapter = new ContactAdapter(contacts, context);
+                contactsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                contactsRecyclerView.setAdapter(adapter);
+                return false;
             }
         });
         addButton = findViewById(R.id.addButton);
