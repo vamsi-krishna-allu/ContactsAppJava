@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditContact">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="419dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="195dp"
+        android:gravity="center_vertical"
+        android:text="Edit Contact"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlCompat" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editfirstName"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:hint="First Name"
+                android:textAlignment="textStart"
+                tools:ignore="MissingConstraints" />
+
+            <EditText
+                android:id="@+id/editlastName"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:hint="Last Name"
+                android:textAlignment="textStart"
+                tools:ignore="MissingConstraints" />
+
+            <EditText
+                android:id="@+id/editphonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:hint="Phone Number"
+                android:textAlignment="textStart" />
+
+            <EditText
+                android:id="@+id/editemailId"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:hint="Email Address"
+                android:textAlignment="textStart" />
+
+            <Button
+                android:id="@+id/editSaveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/light_blue"
+                android:text="save"
+                android:textColor="#FFFFFF"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                tools:text="save" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="100dp"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/editCancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:background="#FFFFFF"
+        android:contentDescription="cancel button"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/homeAsUpIndicator" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
